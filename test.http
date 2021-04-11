@@ -1,0 +1,42 @@
+@host = 192.168.0.104
+@port = 3000
+@URL = http://{{host}}:{{port}}
+
+GET {{URL}}/
+
+###
+GET {{URL}}/addEmployee
+?name=Ayush-Shashank
+&dept=CSE
+###
+GET {{URL}}/addEmployee
+?name=Ayush Shashank
+&dept=CS
+&bio=Lorem Ipsum
+
+###
+GET {{URL}}/adminLogin
+?user=root
+&pass=root
+
+###
+GET {{URL}}/getEmployees
+
+###
+GET {{URL}}/employeeLogin
+?empCode=EMP0028
+&encPass=abc
+
+###
+GET {{URL}}/updateEmployee
+?empCode=EMP0029
+&dept=IS
+&bio=Lorem
+&isResetPass=1
+
+###
+GET {{URL}}/deleteEmployee
+?empCode=EMP0025
+&dept=IS
+&bio=Lorem
+&isResetPass=1
