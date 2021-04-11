@@ -1,0 +1,12 @@
+.card-container {
+    display: flex;
+    height: 100vh;
+}
+
+.card {
+    width: 350px;
+}
+
+button{
+    width: 100%;
+}
