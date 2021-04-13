@@ -9,11 +9,10 @@
                 <form [formGroup]="editEmp" id="editEmpForm" class="row gy-2" (ngSubmit)="onSubmit()">
                     <div class="mb-3">
                         <label class="form-label">Department</label>
-                        <select class="form-select" formControlName="dept"
-                            [ngClass]="{'is-invalid':submitted && f.dept.errors}">
+                        <select class="form-select" formControlName="dept" [ngClass]="{'is-invalid':f.dept.errors}">
                             <option *ngFor="let dept of depts" [ngValue]="dept">{{dept}}</option>
                         </select>
-                        <div [hidden]="submitted && !f.dept.errors" class="invalid-feedback">
+                        <div [hidden]="!f.dept.errors" class="invalid-feedback">
                             <div *ngIf="f.dept.errors?.required">Department is required</div>
                         </div>
                     </div>

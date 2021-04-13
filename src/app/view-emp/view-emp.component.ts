@@ -8,26 +8,37 @@ import { Employee } from '../employee';
   styleUrls: ['./view-emp.component.css'],
 })
 export class ViewEmpComponent implements OnInit {
-  // employees: Employee[] = [];
-  editEmp: any;
-  constructor(private ds: DataService) {
-    // this.getEmployees();
-    // this.editEmp = this.employees[0];
-  }
+  editEmp: Employee | undefined;
+  constructor(private ds: DataService) {}
 
   ngOnInit(): void {}
 
   get employees(): Employee[] {
     return this.ds.employees;
-    // this.ds.getEmployees().subscribe((res) => {
-    //   console.log(res);
-    //   this.employees = res;
-    // });
-    // this.employees = this.ds.employees;
   }
 
-  onClickUpdate(emp: any): void {
+  onClickView(emp: Employee): void {
+    this.ds.getEmployeeAttendance(emp.empCode).subscribe((res) => {
+      console.log(res);
+    });
+  }
+
+  onClickUpdate(emp: Employee): void {
     this.editEmp = emp;
-    console.log('update -> ', emp);
+  }
+
+  onClickRemove(emp: Employee) {
+    if (
+      confirm('Are you sure you want to remove employee ' + emp.empCode + '?')
+    )
+      this.ds.deleteEmployee(emp.empCode).subscribe((res) => {
+        console.log(res);
+        if (res?.success === 1) {
+          this.ds.employees = this.ds.employees.filter(
+            (employee) => employee.empCode != emp.empCode
+          );
+          alert('Employee ' + emp.empCode + ' deleted');
+        }
+      });
   }
 }

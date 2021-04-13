@@ -10,7 +10,6 @@ import { DataService } from '../data.service';
 export class AddEmpComponent implements OnInit {
   addEmp: FormGroup;
   submitted = false;
-  depts: string[] = [];
 
   constructor(private fb: FormBuilder, private ds: DataService) {
     this.addEmp = fb.group({
@@ -20,12 +19,14 @@ export class AddEmpComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.depts = this.ds.depts;
-  }
+  ngOnInit(): void {}
 
   get f(): any {
     return this.addEmp.controls;
+  }
+
+  get depts(): string[] {
+    return this.ds.depts;
   }
 
   onSubmit(): void {
@@ -38,7 +39,7 @@ export class AddEmpComponent implements OnInit {
       console.log(res);
       alert('Employee added successfully!\nEmployeeID: ' + res?.empCode);
       this.ds.employees.push({
-        empCode: res.empCode,
+        empCode: res?.empCode,
         name: e.name,
         dept: e.dept,
         bio: e.bio,

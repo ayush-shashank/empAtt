@@ -7,12 +7,13 @@ import { Employee } from './employee';
   providedIn: 'root',
 })
 export class DataService {
-  ip = `http://localhost:3000`;
+  ip = ``;
   depts = ['BT', 'CS', 'CV', 'EC', 'EE', 'IS', 'ME'];
   employees: Employee[] = [];
   employeeChange: Subject<any> = new Subject<any>();
 
   constructor(private http: HttpClient) {
+    this.getEmployees();
     this.employeeChange.subscribe((val) => {
       this.employees = val;
     });
@@ -30,23 +31,25 @@ export class DataService {
     });
   }
 
-  getEmployees(): Observable<any> {
+  getEmployees(): void {
     this.http.get(`${this.ip}/getEmployees`).subscribe((res) => {
       this.employeeChange.next(res);
     });
-    return this.employeeChange;
   }
 
   updateEmployee(
+    empCode: string,
     department: string,
     bio: string,
-    resetPassword: boolean
+    isResetPassword: boolean
   ): Observable<any> {
+    console.log(empCode + department + bio + isResetPassword);
     return this.http.get(`${this.ip}/updateEmployee`, {
       params: {
+        empCode,
         dept: department,
         bio,
-        resetPass: resetPassword ? 'true' : 'false',
+        isResetPass: isResetPassword ? '1' : '0',
       },
     });
   }
