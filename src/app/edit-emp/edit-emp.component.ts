@@ -53,7 +53,7 @@ export class EditEmpComponent implements OnInit, OnChanges {
       .updateEmployee(this.emp.empCode, e.dept, e.bio, e.isResetPass)
       .subscribe((res: any) => {
         console.log(res);
-        if (res?.success == 1) {
+        if (res?.CODE == 1) {
           const i = this.ds.employees.findIndex(
             (employee) => employee.empCode === this.emp.empCode
           );

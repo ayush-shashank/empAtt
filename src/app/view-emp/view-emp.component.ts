@@ -33,7 +33,7 @@ export class ViewEmpComponent implements OnInit {
     )
       this.ds.deleteEmployee(emp.empCode).subscribe((res) => {
         console.log(res);
-        if (res?.success === 1) {
+        if (res?.CODE === 1) {
           this.ds.employees = this.ds.employees.filter(
             (employee) => employee.empCode != emp.empCode
           );
