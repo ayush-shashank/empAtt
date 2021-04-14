@@ -7,7 +7,7 @@ import { Employee } from './employee';
   providedIn: 'root',
 })
 export class DataService {
-  ip = ``;
+  ip = `http://localhost:3000`;
   depts = ['BT', 'CS', 'CV', 'EC', 'EE', 'IS', 'ME'];
   employees: Employee[] = [];
   employeeChange: Subject<any> = new Subject<any>();
