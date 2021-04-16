@@ -40,3 +40,13 @@ GET {{URL}}/deleteEmployee
 &dept=IS
 &bio=Lorem
 &isResetPass=1
+
+###
+GET {{URL}}/markEmployeeAttendance
+?empCode=EMP0031
+
+###
+GET {{URL}}/getEmployeeAttendance
+?empCode=EMP0031
+&month=4
+&year=2021

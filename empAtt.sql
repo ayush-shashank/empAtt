@@ -42,6 +42,31 @@ INSERT INTO `admin` VALUES ('root','root');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `attendance`
+--
+
+DROP TABLE IF EXISTS `attendance`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `attendance` (
+  `id` int NOT NULL,
+  `date` date NOT NULL,
+  PRIMARY KEY (`id`,`date`),
+  CONSTRAINT `fk_emp_id` FOREIGN KEY (`id`) REFERENCES `employee` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `attendance`
+--
+
+LOCK TABLES `attendance` WRITE;
+/*!40000 ALTER TABLE `attendance` DISABLE KEYS */;
+INSERT INTO `attendance` VALUES (28,'2021-04-16');
+/*!40000 ALTER TABLE `attendance` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `employee`
 --
 
@@ -65,7 +90,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (1,'Ayush','CS','I am Iron Man',0,'newPass'),(2,'Ayush Shashank','IS',NULL,0,NULL),(3,'Ayush-Shashank','CSE','Lorem',0,NULL),(4,'Ayush-Shashank','CSE','Lorem',0,NULL),(5,'Ayush-Shashank','CSE','Lorem',0,NULL),(6,'Ayush-Shashank','CSE','Lorem',0,NULL),(7,'Ayush-Shashank','CSE',NULL,0,NULL),(8,'Ayush-Shashank','CSE',NULL,0,NULL),(9,'Ayush-Shashank','CSE',NULL,0,NULL),(10,'Ayush-Shashank','CSE',NULL,0,NULL),(11,'Ayush-Shashank','CSE',NULL,0,NULL),(12,'Ayush-Shashank','CSE','Lorem',0,NULL),(13,'Ayush-Shashank','CSE','Lorem',0,NULL),(14,'Ayush-Shashank','CSE',NULL,0,NULL),(15,'Ayush-Shashank','CSE','Lorem',0,NULL),(16,'Ayush-Shashank','CSE',NULL,0,NULL),(17,'Ayush-Shashank','CSE','Lorem',0,NULL),(18,'Ayush-Shashank','CSE',NULL,0,NULL),(19,'Ayush-Shashank','CSE','Lorem',0,NULL),(20,'Ayush-Shashank','CSE','Lorem',0,NULL),(21,'Ayush-Shashank','CSE','Lorem',0,NULL),(22,'Ayush-Shashank','CSE','Lorem',0,NULL),(23,'Ayush-Shashank','CSE','Lorem',0,NULL),(24,'Ayush-Shashank','CSE',NULL,0,NULL),(27,'Ayush Shashank','CSE','Lorem Ipsum',0,'jsdhgfsjdfhg'),(28,'Ayush Shashank','IS','Lorem',1,'abcd'),(29,'Ayush','CS','Lorem Ipsum',0,NULL),(30,'Ayush Shashank','CV','sf',0,NULL);
+INSERT INTO `employee` VALUES (1,'Ayush','CS','I am Iron Man',0,'newPass'),(2,'Ayush Shashank','IS',NULL,0,NULL),(3,'Ayush-Shashank','CSE','Lorem',0,NULL),(4,'Ayush-Shashank','CSE','Lorem',0,NULL),(5,'Ayush-Shashank','CSE','Lorem',0,NULL),(6,'Ayush-Shashank','CSE','Lorem',0,NULL),(7,'Ayush-Shashank','CSE',NULL,0,NULL),(8,'Ayush-Shashank','CSE',NULL,0,NULL),(9,'Ayush-Shashank','CSE',NULL,0,NULL),(10,'Ayush-Shashank','CSE',NULL,0,NULL),(11,'Ayush-Shashank','CSE',NULL,0,NULL),(13,'Ayush-Shashank','CSE','Lorem',0,NULL),(14,'Ayush-Shashank','CSE',NULL,0,NULL),(15,'Ayush-Shashank','CSE','Lorem',0,NULL),(16,'Ayush-Shashank','CSE',NULL,0,NULL),(17,'Ayush-Shashank','CSE','Lorem',0,NULL),(18,'Ayush-Shashank','CSE',NULL,0,NULL),(19,'Ayush-Shashank','CSE','Lorem',0,NULL),(20,'Ayush-Shashank','CS','Lorem',0,NULL),(21,'Ayush-Shashank','CSE','Lorem',0,NULL),(23,'Ayush-Shashank','CSE','Lorem',0,NULL),(24,'Ayush-Shashank','CSE',NULL,0,NULL),(27,'Ayush Shashank','CSE','Lorem Ipsum',0,'jsdhgfsjdfhg'),(28,'Ayush Shashank','IS','Lorem',1,'abcd'),(29,'Ayush','CS','Lorem Ipsum Dor Mes Si',0,NULL),(30,'Ayush Shashank','CV','sf',0,NULL);
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -292,6 +317,31 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `get_attendance` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_attendance`(emp_code varchar(9), att_month int, att_year int)
+BEGIN
+
+SELECT date_format(`date`,'%d-%m-%Y') AS `date`
+FROM `empatt`.`attendance`
+WHERE `id`= `empatt`.`decode_emp_id`(emp_code)
+	AND month(`date`) = att_month
+    AND year(`date`) = att_year;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `get_employees` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -311,6 +361,34 @@ SELECT `empatt`.`encode_emp_id`(`id`) AS 'empCode',
     `bio`,
     `isResetPassword` AS 'isResetPass'
 FROM `empatt`.`employee`;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `mark_attendance` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `mark_attendance`(emp_code varchar(9))
+BEGIN
+
+INSERT IGNORE INTO `empatt`.`attendance`
+VALUES (`empatt`.`decode_emp_id`(emp_code), curdate());
+
+IF row_count() = 1 THEN
+	SELECT 1 AS CODE, 'Attendance marked successfully' as msg;
+ELSE
+	SELECT 0 AS CODE, 'Attendance already marked' as msg;
+END IF;
 
 END ;;
 DELIMITER ;
@@ -363,4 +441,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-11 23:50:57
+-- Dump completed on 2021-04-16 20:38:55

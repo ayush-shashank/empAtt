@@ -21,7 +21,7 @@ con.connect(err => {
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    res.send('index.html');
+    res.sendFile('index.html');
 });
 
 app.get('/adminLogin', (req, res) => {
@@ -80,5 +80,25 @@ app.get('/employeeLogin', (req, res) => {
         if (err) console.log(err.message)
         console.log(result)
         res.json(result[0][0])
+    });
+});
+
+app.get('/markEmployeeAttendance', (req, res) => {
+    let sql = 'CALL mark_attendance(?)';
+    let data = [req.query.empCode];
+    con.query(sql, data, (err, result) => {
+        if (err) console.log(err.message)
+        console.log(result)
+        res.json(result[0][0])
+    });
+});
+
+app.get('/getEmployeeAttendance', (req, res) => {
+    let sql = 'CALL get_attendance(?,?,?)';
+    let data = [req.query.empCode, req.query.month, req.query.year];
+    con.query(sql, data, (err, result) => {
+        if (err) console.log(err.message)
+        console.log(result)
+        res.json(result[0])
     });
 });
