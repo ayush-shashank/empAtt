@@ -1,4 +1,4 @@
-@host = 192.168.0.104
+@host = 192.168.0.105
 @port = 3000
 @URL = http://{{host}}:{{port}}
 
@@ -36,7 +36,7 @@ GET {{URL}}/updateEmployee
 
 ###
 GET {{URL}}/deleteEmployee
-?empCode=EMP0025
+?empCode=EMP0029
 &dept=IS
 &bio=Lorem
 &isResetPass=1
@@ -48,5 +48,13 @@ GET {{URL}}/markEmployeeAttendance
 ###
 GET {{URL}}/getEmployeeAttendance
 ?empCode=EMP0031
-&month=4
+&month=5
 &year=2021
+
+###
+GET {{URL}}/markEmployeeCheckin
+?empCode=EMP0031
+
+###
+GET {{URL}}/markEmployeeCheckout
+?empCode=EMP0031
