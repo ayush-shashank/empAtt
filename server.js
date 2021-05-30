@@ -1,10 +1,13 @@
 const express = require('express');
 const mysql = require('mysql');
+const cors = require('cors');
 
 const app = express();
 let host = 'localhost';
 const port = 3000;
 const con = mysql.createConnection('mysql://root:root@localhost:3306/one_touch');
+
+app.use(cors());
 
 con.connect(err => {
     if (err)
