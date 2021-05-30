@@ -60,9 +60,9 @@ export class DataService {
     });
   }
 
-  getEmployeeAttendance(empCode: string): Observable<any> {
+  getEmployeeAttendance(empCode: string, month:string, year:string): Observable<any> {
     return this.http.get(`${this.ip}/getEmployeeAttendance`, {
-      params: { empCode },
+      params: { empCode, month, year },
     });
   }
 }

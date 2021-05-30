@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddEmpComponent } from './add-emp/add-emp.component';
 import { EditEmpComponent } from './edit-emp/edit-emp.component';
 import { ViewEmpComponent } from './view-emp/view-emp.component';
+import { ViewAttComponent } from './view-att/view-att.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ViewEmpComponent } from './view-emp/view-emp.component';
     AddEmpComponent,
     EditEmpComponent,
     ViewEmpComponent,
+    ViewAttComponent,
   ],
   imports: [
     BrowserModule,

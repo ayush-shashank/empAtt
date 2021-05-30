@@ -9,6 +9,7 @@ import { Employee } from '../employee';
 })
 export class ViewEmpComponent implements OnInit {
   editEmp: Employee | undefined;
+  viewEmpAtt: Employee | undefined;
   constructor(private ds: DataService) {}
 
   ngOnInit(): void {}
@@ -18,9 +19,10 @@ export class ViewEmpComponent implements OnInit {
   }
 
   onClickView(emp: Employee): void {
-    this.ds.getEmployeeAttendance(emp.empCode).subscribe((res) => {
-      console.log(res);
-    });
+    this.viewEmpAtt = emp;
+    // this.ds.getEmployeeAttendance(emp.empCode).subscribe((res) => {
+    //   console.log(res);
+    // });
   }
 
   onClickUpdate(emp: Employee): void {

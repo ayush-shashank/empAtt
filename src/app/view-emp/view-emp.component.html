@@ -29,7 +29,8 @@
                             <div class="stick-bottom">
                                 <div class="row gy-1">
                                     <div class="col-sm-4">
-                                        <button class="btn btn-primary" (click)="onClickView(emp)">View Attendance</button>
+                                        <button class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#viewEmpAttModal" (click)="onClickView(emp)">View Attendance</button>
                                     </div>
                                     <div class="col-sm-4">
                                         <button class="btn btn-dark" data-bs-toggle="modal"
@@ -50,3 +51,4 @@
     </div>
 </div>
 <app-edit-emp [emp]="editEmp"></app-edit-emp>
+<app-view-att [emp]="viewEmpAtt"></app-view-att>
