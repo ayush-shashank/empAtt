@@ -1,0 +1,39 @@
+<div class="modal fade" id="updateEmpModal" tabindex="-1" aria-labelledby="updateEmpModal" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{emp?.empCode}} - {{emp?.name}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="editEmp" id="editEmpForm" class="row gy-2" (ngSubmit)="onSubmit()">
+                    <div class="mb-3">
+                        <label class="form-label">Department</label>
+                        <select class="form-select" formControlName="dept" [ngClass]="{'is-invalid':f.dept.errors}">
+                            <option *ngFor="let dept of depts" [ngValue]="dept">{{dept}}</option>
+                        </select>
+                        <div [hidden]="!f.dept.errors" class="invalid-feedback">
+                            <div *ngIf="f.dept.errors?.required">Department is required</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Bio</label>
+                        <textarea class="form-control" placeholder="Bio" formControlName="bio"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <div class="col ms-1">
+                            <input class="form-check-input" type="checkbox" formControlName="isResetPass"
+                                aria-label="Reset Password">
+                            Reset Password
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                <button type="submit" form="editEmpForm" (click)="onSubmit()" class="btn btn-primary"
+                    data-bs-dismiss="modal">Update Employee</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,18 +1,34 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginAdminComponent } from './login-admin/login-admin.component';
+import { HomeAdminComponent } from './home-admin/home-admin.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { AddEmpComponent } from './add-emp/add-emp.component';
+import { EditEmpComponent } from './edit-emp/edit-emp.component';
+import { ViewEmpComponent } from './view-emp/view-emp.component';
+import { ViewAttComponent } from './view-att/view-att.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginAdminComponent,
+    HomeAdminComponent,
+    AddEmpComponent,
+    EditEmpComponent,
+    ViewEmpComponent,
+    ViewAttComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
