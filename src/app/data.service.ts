@@ -41,6 +41,8 @@ export class DataService {
     empCode: string,
     department: string,
     bio: string,
+    expectedInTime: string,
+    expectedOutTime: string,
     isResetPassword: boolean
   ): Observable<any> {
     console.log(empCode + department + bio + isResetPassword);
@@ -49,6 +51,8 @@ export class DataService {
         empCode,
         dept: department,
         bio,
+        expectedInTime,
+        expectedOutTime,
         isResetPass: isResetPassword ? '1' : '0',
       },
     });
@@ -60,7 +64,11 @@ export class DataService {
     });
   }
 
-  getEmployeeAttendance(empCode: string, month:string, year:string): Observable<any> {
+  getEmployeeAttendance(
+    empCode: string,
+    month: string,
+    year: string
+  ): Observable<any> {
     return this.http.get(`${this.ip}/getEmployeeAttendance`, {
       params: { empCode, month, year },
     });

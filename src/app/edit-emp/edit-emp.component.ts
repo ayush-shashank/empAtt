@@ -50,7 +50,7 @@ export class EditEmpComponent implements OnInit, OnChanges {
     console.log(this.emp.empCode, this.editEmp.value);
     const e = this.editEmp.value;
     this.ds
-      .updateEmployee(this.emp.empCode, e.dept, e.bio, e.isResetPass)
+      .updateEmployee(this.emp.empCode, e.dept, e.bio, e.isResetPass, e.inTime, e.outTime)
       .subscribe((res: any) => {
         console.log(res);
         if (res?.CODE == 1) {

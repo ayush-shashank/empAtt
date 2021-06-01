@@ -22,6 +22,26 @@
                                 <div *ngIf="f.dept.errors?.required">Department is required</div>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="col-md-6 col-form-label">Expected In-Time</label>
+                                <div class="col-md-6">
+                                    <input type="time" class="form-control" placeholder="Expected In-Time"
+                                        formControlName="inTime"
+                                        [ngClass]="{'is-invalid':submitted && f.inTime.errors}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="col-md-6 col-form-label">Expected Out-Time</label>
+                                <div class="col-md-6">
+                                    <input type="time" class="form-control" placeholder="Expected Out-Time"
+                                        formControlName="outTime"
+                                        [ngClass]="{'is-invalid':submitted && f.outTime.errors}">
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-sm-12">
                             <textarea class="form-control" rows="1" placeholder="Bio" formControlName="bio"></textarea>
                         </div>

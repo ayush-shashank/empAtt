@@ -16,6 +16,8 @@ export class AddEmpComponent implements OnInit {
       name: ['', Validators.required],
       dept: ['', Validators.required],
       bio: [''],
+      inTime:[''],
+      outTime:['']
     });
   }
 
@@ -43,6 +45,8 @@ export class AddEmpComponent implements OnInit {
         name: e.name,
         dept: e.dept,
         bio: e.bio,
+        expectedInTime: e.inTime,
+        expectedOutTime: e.outTime,
         isResetPass: false,
       });
     });

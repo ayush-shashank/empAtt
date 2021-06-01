@@ -17,6 +17,24 @@
                         </div>
                     </div>
                     <div class="mb-3">
+                        <div class="row">
+                            <label class="col-md-6 col-form-label">Expected In-Time</label>
+                            <div class="col-md-6">
+                                <input type="time" class="form-control" placeholder="Expected In-Time"
+                                    formControlName="inTime" [ngClass]="{'is-invalid': f.inTime.errors}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <label class="col-md-6 col-form-label">Expected Out-Time</label>
+                            <div class="col-md-6">
+                                <input type="time" class="form-control" placeholder="Expected Out-Time"
+                                    formControlName="outTime" [ngClass]="{'is-invalid': f.outTime.errors}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label">Bio</label>
                         <textarea class="form-control" placeholder="Bio" formControlName="bio"></textarea>
                     </div>
