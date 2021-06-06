@@ -23,38 +23,39 @@ GET {{URL}}/adminLogin
 GET {{URL}}/getEmployees
 
 ###
+GET {{URL}}/getDepartments
+###
 GET {{URL}}/employeeLogin
-?empCode=EMP0028
+?empCode=EMP0050
 &encPass=abc
 
 ###
 GET {{URL}}/updateEmployee
-?empCode=EMP0029
-&dept=IS
+?empCode=EMP0050
+&dept=CS
 &bio=Lorem
-&isResetPass=1
-
+&isResetPass=0
+&eInTime=9:30
+&eOutTime=16:00
+&startDate=2021-06-10
 ###
 GET {{URL}}/deleteEmployee
-?empCode=EMP0029
-&dept=IS
-&bio=Lorem
-&isResetPass=1
+?empCode=EMP0030
 
 ###
 GET {{URL}}/markEmployeeAttendance
-?empCode=EMP0031
+?empCode=EMP0036
 
 ###
 GET {{URL}}/getEmployeeAttendance
-?empCode=EMP0031
-&month=5
+?empCode=EMP0037
+&month=6
 &year=2021
 
 ###
 GET {{URL}}/markEmployeeCheckin
-?empCode=EMP0031
+?empCode=EMP0037
 
 ###
 GET {{URL}}/markEmployeeCheckout
-?empCode=EMP0031
+?empCode=EMP0037

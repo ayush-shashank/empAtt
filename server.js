@@ -37,6 +37,14 @@ app.get('/adminLogin', (req, res) => {
     });
 });
 
+app.get('/getDepartments', (req, res) => {
+    let sql = 'SELECT `name` FROM `department`;'
+    con.query(sql, (err, result) => {
+        if (err) console.log(err.message);
+        res.json(result.map(d => d.name));
+    });
+});
+
 app.get('/getEmployees', (req, res) => {
     let sql = 'CALL get_employees()'
     con.query(sql, (err, result) => {
@@ -47,18 +55,29 @@ app.get('/getEmployees', (req, res) => {
 
 app.get('/addEmployee', (req, res) => {
     console.log(req.query);
-    let sql = 'CALL add_employee(?, ?, ?)'
-    let data = [req.query.name, req.query.dept, req.query.bio]
+    let sql = 'CALL add_employee(?,?,?,?,?,?)';
+    console.log(req.query)
+    let data = [req.query.name, req.query.dept, req.query.bio, req.query.eInTime, req.query.eOutTime, req.query.startDate]
     con.query(sql, data, (err, result) => {
         if (err) console.log(err.message);
-        res.json(result[0][0]);
+        else res.json(result[0][0]);
     });
 });
 
 app.get('/updateEmployee', (req, res) => {
-    let sql = 'CALL update_employee(?,?,?,?)';
+    let sql = 'CALL update_employee(?,?,?,?,?,?,?)';
     console.log("UPDATE", req.query)
-    let data = [req.query.empCode, req.query.dept, req.query.bio, req.query.isResetPass == '1' ? 1 : 0];
+    let data = [
+        req.query.empCode,
+        req.query.dept,
+        req.query.bio != 'null' ? req.query.bio : undefined,
+        req.query.isResetPass == '1' ? 1 : 0,
+        req.query.eInTime != 'null' ? req.query.eInTime : undefined,
+        req.query.eOutTime != 'null' ? req.query.eOutTime : undefined,
+        req.query.startDate
+    ];
+    console.log(data)
+
     con.query(sql, data, (err, result) => {
         if (err) console.log(err.message);
         console.log(result[0]);
@@ -86,15 +105,15 @@ app.get('/employeeLogin', (req, res) => {
     });
 });
 
-app.get('/markEmployeeAttendance', (req, res) => {
-    let sql = 'CALL mark_attendance(?)';
-    let data = [req.query.empCode];
-    con.query(sql, data, (err, result) => {
-        if (err) console.log(err.message);
-        console.log(result);
-        res.json(result[0][0]);
-    });
-});
+// app.get('/markEmployeeAttendance', (req, res) => {
+//     let sql = 'CALL mark_attendance(?)';
+//     let data = [req.query.empCode];
+//     con.query(sql, data, (err, result) => {
+//         if (err) console.log(err.message);
+//         console.log(result);
+//         res.json(result[0][0]);
+//     });
+// });
 
 app.get('/getEmployeeAttendance', (req, res) => {
     let sql = 'CALL get_attendance(?,?,?)';
@@ -117,7 +136,7 @@ app.get('/markEmployeeCheckin', (req, res) => {
 });
 
 app.get('/markEmployeeCheckout', (req, res) => {
-    let sql = `CALL mark_checkout('EMP0031');`;
+    let sql = `CALL mark_checkout(?);`;
     let data = [req.query.empCode];
     con.query(sql, data, (err, result) => {
         if (err) console.log(err.message);
