@@ -21,7 +21,7 @@
                             <label class="col-md-6 col-form-label">Expected In-Time</label>
                             <div class="col-md-6">
                                 <input type="time" class="form-control" placeholder="Expected In-Time"
-                                    formControlName="inTime" [ngClass]="{'is-invalid': f.inTime.errors}">
+                                    formControlName="eInTime" [ngClass]="{'is-invalid': f.eInTime.errors}">
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,19 @@
                             <label class="col-md-6 col-form-label">Expected Out-Time</label>
                             <div class="col-md-6">
                                 <input type="time" class="form-control" placeholder="Expected Out-Time"
-                                    formControlName="outTime" [ngClass]="{'is-invalid': f.outTime.errors}">
+                                    formControlName="eOutTime" [ngClass]="{'is-invalid': f.eOutTime.errors}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <label class="col-md-6 col-form-label">Start Date</label>
+                            <div class="col-md-6">
+                                <input type="date" class="form-control" placeholder="Start Date"
+                                    formControlName="startDate" [ngClass]="{'is-invalid': f.startDate.errors}">
+                            </div>
+                            <div [hidden]="!f.startDate.errors" class="invalid-feedback">
+                                <div *ngIf="f.startDate.errors?.required">Start Date is required</div>
                             </div>
                         </div>
                     </div>

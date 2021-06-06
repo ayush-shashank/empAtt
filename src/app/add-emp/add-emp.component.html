@@ -2,77 +2,90 @@
     <div class="card mx-auto mt-5">
         <div class="card-header">Add Employee</div>
         <div class="card-body">
-            <form [formGroup]="addEmp" class="row gy-2" (ngSubmit)="onSubmit()" (reset)="onReset()">
-                <div class="col-sm-10">
-                    <div class="row gy-1">
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder="Name" formControlName="name"
-                                [ngClass]="{'is-invalid':submitted && f.name.errors}">
-                            <div [hidden]="submitted && !f.name.errors" class="invalid-feedback">
-                                <div *ngIf="f.name.errors?.required">Name is required</div>
-                            </div>
+            <form [formGroup]="addEmp" class="row gy-2 justify-content-evenly" (ngSubmit)="onSubmit()"
+                (reset)="onReset()">
+                <!-- <div class="col-sm-10"> -->
+                <div class="row gy-1">
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="Name" formControlName="name"
+                            [ngClass]="{'is-invalid':submitted && f.name.errors}">
+                        <div [hidden]="submitted && !f.name.errors" class="invalid-feedback">
+                            <div *ngIf="f.name.errors?.required">Name is required</div>
                         </div>
-                        <div class="col-md-6">
-                            <select class="form-select" formControlName="dept"
-                                [ngClass]="{'is-invalid':submitted && f.dept.errors}">
-                                <option value="" disabled>Select Department</option>
-                                <option *ngFor="let dept of depts" [value]="dept">{{dept}}</option>
-                            </select>
-                            <div [hidden]="submitted && !f.dept.errors" class="invalid-feedback">
-                                <div *ngIf="f.dept.errors?.required">Department is required</div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="row">
-                                <label class="col-md-6 col-form-label">Expected In-Time</label>
-                                <div class="col-md-6">
-                                    <input type="time" class="form-control" placeholder="Expected In-Time"
-                                        formControlName="inTime"
-                                        [ngClass]="{'is-invalid':submitted && f.inTime.errors}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="row">
-                                <label class="col-md-6 col-form-label">Expected Out-Time</label>
-                                <div class="col-md-6">
-                                    <input type="time" class="form-control" placeholder="Expected Out-Time"
-                                        formControlName="outTime"
-                                        [ngClass]="{'is-invalid':submitted && f.outTime.errors}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <textarea class="form-control" rows="1" placeholder="Bio" formControlName="bio"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <select class="form-select" formControlName="dept"
+                            [ngClass]="{'is-invalid':submitted && f.dept.errors}">
+                            <option value="" disabled>Select Department</option>
+                            <option *ngFor="let dept of depts" [value]="dept">{{dept}}</option>
+                        </select>
+                        <div [hidden]="submitted && !f.dept.errors" class="invalid-feedback">
+                            <div *ngIf="f.dept.errors?.required">Department is required</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-2">
-                    <div class="row gy-1">
-                        <div class="col-sm-12">
-                            <button type="submit" class="btn btn-outline-success">
-                                <div class="row mx-0 px-0 gx-1">
-                                    <div class="col-3 mx-0 px-0">
-                                        <i class="bi-plus-circle-fill"></i>
-                                    </div>
-                                    <div class="col-9 mx-0 px-0">
-                                        Add
-                                    </div>
-                                </div>
-                            </button>
+                <div class="row gy-1">
+                    <div class="col-md-4">
+                        <div class="row">
+                            <label class="form-label">Expected In-Time</label>
+                            <div class="col-md-12">
+                                <input type="time" class="form-control" placeholder="Expected In-Time"
+                                    formControlName="inTime" [ngClass]="{'is-invalid':submitted && f.inTime.errors}">
+                            </div>
                         </div>
-                        <div class="col-sm-12">
-                            <button type="reset" class="btn btn-outline-primary">
-                                <div class="row mx-0 px-0 gx-1">
-                                    <div class="col-3 col-sm-3 mx-0 px-0">
-                                        <i class="bi-x-circle"></i>
-                                    </div>
-                                    <div class="col-9 col-sm-9 mx-0 px-0">
-                                        Reset
-                                    </div>
-                                </div>
-                            </button>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <label class="form-label">Expected Out-Time</label>
+                            <div class="col-md-12">
+                                <input type="time" class="form-control" placeholder="Expected Out-Time"
+                                    formControlName="outTime" [ngClass]="{'is-invalid':submitted && f.outTime.errors}">
+                            </div>
                         </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <label class="form-label">Start Date</label>
+                            <div class="col-md-12">
+                                <input type="date" class="form-control" placeholder="Start Date"
+                                    formControlName="startDate"
+                                    [ngClass]="{'is-invalid':submitted && f.startDate.errors}">
+                                <div [hidden]="submitted && !f.startDate.errors" class="invalid-feedback">
+                                    <div *ngIf="f.startDate.errors?.required">Start Date is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row gy-1">
+                    <div class="col-sm-12">
+                        <textarea class="form-control" rows="1" placeholder="Bio" formControlName="bio"></textarea>
+                    </div>
+                </div>
+                <div class="row gy-1">
+                    <div class="col-sm-6">
+                        <button type="submit" class="btn btn-outline-success">
+                            <div class="row mx-0 px-0 gx-1">
+                                <div class="col-3 mx-0 px-0">
+                                    <i class="bi-plus-circle-fill"></i>
+                                </div>
+                                <div class="col-9 mx-0 px-0">
+                                    Add
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button type="reset" class="btn btn-outline-primary">
+                            <div class="row mx-0 px-0 gx-1">
+                                <div class="col-3 col-sm-3 mx-0 px-0">
+                                    <i class="bi-x-circle"></i>
+                                </div>
+                                <div class="col-9 col-sm-9 mx-0 px-0">
+                                    Reset
+                                </div>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </form>

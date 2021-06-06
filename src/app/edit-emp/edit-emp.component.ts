@@ -1,3 +1,4 @@
+import { Time } from '@angular/common';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../data.service';
@@ -17,6 +18,9 @@ export class EditEmpComponent implements OnInit, OnChanges {
       dept: [Validators.required],
       bio: [],
       isResetPass: [],
+      eInTime: [],
+      eOutTime: [],
+      startDate: [Validators.required],
     });
   }
 
@@ -31,10 +35,35 @@ export class EditEmpComponent implements OnInit, OnChanges {
     this.editEmp.controls.isResetPass.setValue(this.emp?.isResetPass, {
       onlySelf: true,
     });
+    this.editEmp.controls.eInTime.setValue(
+      this.emp?.eInTime ? this.emp?.eInTime.substr(0, 5) : null,
+      {
+        onlySelf: true,
+      }
+    );
+    this.editEmp.controls.eOutTime.setValue(
+      this.emp?.eOutTime ? this.emp?.eOutTime.substr(0, 5) : null,
+      {
+        onlySelf: true,
+      }
+    );
+    if (this.emp?.startDate) {
+      let dateParts = this.emp.startDate.split('-');
+      this.editEmp.controls.startDate.setValue(
+        `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`,
+        {
+          onlySelf: true,
+        }
+      );
+    } else {
+      this.editEmp.controls.startDate.setValue(this.emp?.startDate, {
+        onlySelf: true,
+      });
+    }
   }
 
   ngOnChanges(): void {
-    console.log(this.emp);
+    console.log('editEmpOnChngs', this.emp);
     this.setDefault();
   }
 
@@ -50,7 +79,15 @@ export class EditEmpComponent implements OnInit, OnChanges {
     console.log(this.emp.empCode, this.editEmp.value);
     const e = this.editEmp.value;
     this.ds
-      .updateEmployee(this.emp.empCode, e.dept, e.bio, e.isResetPass, e.inTime, e.outTime)
+      .updateEmployee(
+        this.emp.empCode,
+        e.dept,
+        e.bio,
+        e.eInTime,
+        e.eOutTime,
+        e.isResetPass,
+        e.startDate
+      )
       .subscribe((res: any) => {
         console.log(res);
         if (res?.CODE == 1) {
@@ -60,6 +97,9 @@ export class EditEmpComponent implements OnInit, OnChanges {
           this.ds.employees[i].dept = e.dept;
           this.ds.employees[i].bio = e.bio;
           this.ds.employees[i].isResetPass = e.isResetPass;
+          this.ds.employees[i].eInTime = e.inTime;
+          this.ds.employees[i].eOutTime = e.outTime;
+          this.ds.employees[i].startDate = e.startDate;
           alert(
             'Employee updated successfully!\nEmployeeID: ' + this.emp.empCode
           );

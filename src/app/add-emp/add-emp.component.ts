@@ -16,8 +16,9 @@ export class AddEmpComponent implements OnInit {
       name: ['', Validators.required],
       dept: ['', Validators.required],
       bio: [''],
-      inTime:[''],
-      outTime:['']
+      inTime: [''],
+      outTime: [''],
+      startDate: ['', Validators.required],
     });
   }
 
@@ -37,19 +38,25 @@ export class AddEmpComponent implements OnInit {
 
     if (this.addEmp.invalid) return;
     const e = this.addEmp.value;
-    this.ds.addEmployee(e.name, e.dept, e.bio).subscribe((res: any) => {
-      console.log(res);
-      alert('Employee added successfully!\nEmployeeID: ' + res?.empCode);
-      this.ds.employees.push({
-        empCode: res?.empCode,
-        name: e.name,
-        dept: e.dept,
-        bio: e.bio,
-        expectedInTime: e.inTime,
-        expectedOutTime: e.outTime,
-        isResetPass: false,
+    console.log('e', e);
+    this.ds
+      .addEmployee(e.name, e.dept, e.bio, e.inTime, e.outTime, e.startDate)
+      .subscribe((res: any) => {
+        console.log(res);
+        alert('Employee added successfully!\nEmployeeID: ' + res?.empCode);
+        let dateParts = e.startDate.split('-');
+        this.ds.employees.push({
+          empCode: res?.empCode,
+          name: e.name,
+          dept: e.dept,
+          bio: e.bio,
+          eInTime: e.inTime,
+          eOutTime: e.outTime,
+          isResetPass: false,
+          startDate: `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`,
+        });
+        this.onReset();
       });
-    });
   }
 
   onReset(): void {

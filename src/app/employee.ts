@@ -3,7 +3,8 @@ export interface Employee {
   name: string;
   dept: string;
   bio: string;
-  expectedInTime: string;
-  expectedOutTime:string;
+  eInTime: string;
+  eOutTime: string;
   isResetPass: boolean;
+  startDate: string;
 }
