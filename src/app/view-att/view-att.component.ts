@@ -1,5 +1,4 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../data.service';
 
 @Component({
@@ -16,7 +15,7 @@ export class ViewAttComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {}
 
-  ngOnChanges():void{
+  ngOnChanges(): void {
     this.month = new Date();
     this.empAtt = [];
   }
@@ -35,14 +34,40 @@ export class ViewAttComponent implements OnInit, OnChanges {
       .subscribe((res: any) => {
         console.log(res);
         this.empAtt = res;
-        // if (res?.CODE == 1) {
-        //   const i = this.ds.employees.findIndex(
-        //     (employee) => employee.empCode === this.emp.empCode
-        //   );
-        //   alert(
-        //     'Employee updated successfully!\nEmployeeID: ' + this.emp.empCode
-        //   );
-        // }
       });
+  }
+  printAtt(): void {
+    let printContents: any = document.getElementById('empAtt')?.innerHTML;
+    let popupWin: any = window.open('', '_blank');
+    popupWin.document.open();
+    popupWin.document.write(`
+    <html>
+      <head>
+      <title>${this.emp.empCode} Attendance</title>
+        <style>
+            table{
+              width: 85%;
+              margin: 0 auto;
+              border: 2px solid black;
+              border-collapse: collapse;
+            }
+            tr, td {
+              border: 2px solid black;
+              padding: 2.5px 5px;
+            }
+        </style>
+      </head>
+      <body onload="window.print();">
+        <table >
+          ${printContents}
+        </table>
+      </body>
+    </html>`);
+    popupWin.document.close();
+    popupWin.onfocus = () => {
+      setTimeout(() => {
+        popupWin.close();
+      }, 250);
+    };
   }
 }

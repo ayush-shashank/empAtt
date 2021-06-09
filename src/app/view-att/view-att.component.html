@@ -7,15 +7,23 @@
             </div>
             <div class="modal-body">
                 <!-- <form [formGroup]="viewEmpAtt" id="editEmpForm" class="row gy-2" (ngSubmit)="onChange()"> -->
-                    <div class="mb-3">
-                        <div class="col ms-1">
-                            <label class="form-label">Month</label>
-                            <input class="form-control" type="month" [(ngModel)]="month" (change)="onChange()" aria-label="Month">
-                        </div>
+                <div class="mb-3">
+                    <div class="col ms-1">
+                        <label class="form-label">Month</label>
+                        <input class="form-control" type="month" [(ngModel)]="month" (change)="onChange()"
+                            aria-label="Month">
                     </div>
+                </div>
                 <!-- </form> -->
-                <table class="table">
-                    <thead><tr><td>Date</td><td>In-Time</td><td>Out-Time</td><td>Duration</td></tr></thead>
+                <table id="empAtt" class="table">
+                    <thead>
+                        <tr>
+                            <td>Date</td>
+                            <td>In-Time</td>
+                            <td>Out-Time</td>
+                            <td>Duration</td>
+                        </tr>
+                    </thead>
                     <tbody>
                         <tr *ngFor="let att of empAtt">
                             <td>{{att?.date}}</td>
@@ -26,11 +34,9 @@
                     </tbody>
                 </table>
             </div>
-            <!-- <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" form="editEmpForm" (click)="onSubmit()" class="btn btn-primary"
-                    data-bs-dismiss="modal">Update Employee</button>
-            </div> -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark mr-auto" (click)="printAtt()">Print</button>
+            </div>
         </div>
     </div>
 </div>
